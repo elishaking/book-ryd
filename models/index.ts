@@ -1,2 +1,2 @@
-export { IBookQuery, IFetchBooksOptions } from "./book";
+export { IBook, IBookQuery, IFetchBooksOptions } from "./book";
 export { RootStackParamList } from "./navigation";

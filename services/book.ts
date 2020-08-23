@@ -39,6 +39,11 @@ class BookService {
       }, 1000);
     });
   }
+
+  fetchById(id: string) {
+    const url = `https://www.googleapis.com/books/v1/volumes/${id}?fields=id,volumeInfo`;
+    return axios.get(url);
+  }
 }
 
 export const bookService = new BookService();
