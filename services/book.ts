@@ -1,9 +1,10 @@
-import axios from "axios";
+import axios, { Canceler } from "axios";
 import { IBookQuery } from "../models";
 
 const MAX_RESULTS = 20;
 let timer: number | undefined;
 let currentPage = 0;
+let reqCancel: Canceler;
 
 class BookService {
   fetchByQuery(query: string, page?: number): Promise<IBookQuery[]> {
@@ -18,8 +19,14 @@ class BookService {
         currentPage * MAX_RESULTS
       }&maxResults=${MAX_RESULTS}&fields=items.id,items.volumeInfo.title`;
       timer = setTimeout(() => {
+        if (reqCancel) reqCancel();
+
         axios
-          .get(url)
+          .get(url, {
+            cancelToken: new axios.CancelToken((c) => {
+              reqCancel = c;
+            }),
+          })
           .then((res) => {
             currentPage++;
             resolve(res.data.items);

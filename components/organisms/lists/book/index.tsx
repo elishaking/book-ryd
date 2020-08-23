@@ -18,7 +18,7 @@ export const BookList = (props: TProps) => {
   return (
     <FlatList
       style={styles.list}
-      onEndReachedThreshold={0}
+      onEndReachedThreshold={0.01}
       onEndReached={() => {
         props.fetchBooks();
       }}
@@ -47,7 +47,7 @@ const Footer = ({ loading }: { loading: boolean }) => {
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 10,
+    marginTop: 20,
   },
   item: {
     paddingVertical: 15,
