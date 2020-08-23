@@ -13,7 +13,7 @@ interface TProps {
   books: IBookQuery[];
   loading: boolean;
   fetchBooks: () => void;
-  navigate: (routeName: string) => void;
+  navigate: (...args: any) => void;
 }
 
 export const BookList = (props: TProps) => {
@@ -31,7 +31,11 @@ export const BookList = (props: TProps) => {
           <TouchableOpacity
             style={styles.item}
             key={book.item.id}
-            onPress={() => props.navigate("Book")}
+            onPress={() =>
+              props.navigate("Book", {
+                id: book.item.id,
+              })
+            }
           >
             <Text>{book.item.volumeInfo.title}</Text>
           </TouchableOpacity>

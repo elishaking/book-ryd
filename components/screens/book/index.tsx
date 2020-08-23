@@ -1,12 +1,19 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/native";
+import { RootStackParamList } from "../../../models";
 
-export const BookScreen = () => {
+interface TProps {
+  route: RouteProp<RootStackParamList, "Book">;
+}
+
+export const BookScreen = ({ route }: TProps) => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Text>Book</Text>
+      <Text>{route.params.id}</Text>
     </View>
   );
 };
