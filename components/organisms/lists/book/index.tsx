@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import { IBookQuery } from "../../../../models";
 
@@ -26,9 +27,9 @@ export const BookList = (props: TProps) => {
       data={props.books}
       renderItem={(book) => {
         return (
-          <View style={styles.item} key={book.item.id}>
+          <TouchableOpacity style={styles.item} key={book.item.id}>
             <Text>{book.item.volumeInfo.title}</Text>
-          </View>
+          </TouchableOpacity>
         );
       }}
     />

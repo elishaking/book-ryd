@@ -12,8 +12,6 @@ class BookService {
       if (timer !== undefined) clearTimeout(timer);
       if (page === 0) currentPage = 0;
 
-      console.log(currentPage);
-
       if (query === "") return resolve([]);
       const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&startIndex=${
         currentPage * MAX_RESULTS
