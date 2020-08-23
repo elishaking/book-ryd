@@ -1,13 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
+import { StackScreenProps } from "@react-navigation/stack";
 
 import { IBookQuery } from "../../../models";
 import { bookService } from "../../../services";
 import { Input } from "../../atoms";
 import { BookList } from "../../organisms";
 
-export const HomeScreen = () => {
+export const HomeScreen = ({ navigation }: StackScreenProps<{}>) => {
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState<IBookQuery[]>([]);
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,12 @@ export const HomeScreen = () => {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Input placeholder="Search Books" onChangeText={fetchBooks} />
-      <BookList books={books} loading={loading} fetchBooks={fetchMoreBooks} />
+      <BookList
+        books={books}
+        loading={loading}
+        fetchBooks={fetchMoreBooks}
+        navigate={navigation.navigate}
+      />
     </View>
   );
 };
@@ -41,9 +47,7 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
-    paddingBottom: 10,
-    paddingHorizontal: 20,
+    padding: 20,
     backgroundColor: "#fff",
     justifyContent: "center",
   },
