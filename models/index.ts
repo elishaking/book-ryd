@@ -1,1 +1,1 @@
-export { IBookQuery } from "./book";
+export { IBookQuery, IFetchBooksOptions } from "./book";

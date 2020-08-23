@@ -11,15 +11,16 @@ import { IBookQuery } from "../../../../models";
 interface TProps {
   books: IBookQuery[];
   loading: boolean;
+  fetchBooks: () => void;
 }
 
 export const BookList = (props: TProps) => {
   return (
     <FlatList
       style={styles.list}
-      onEndReachedThreshold={0.3}
+      onEndReachedThreshold={0}
       onEndReached={() => {
-        console.log("loading...");
+        props.fetchBooks();
       }}
       ListFooterComponent={<Footer loading={props.loading} />}
       data={props.books}
@@ -38,8 +39,8 @@ const Footer = ({ loading }: { loading: boolean }) => {
   if (!loading) return null;
 
   return (
-    <View>
-      <ActivityIndicator animating />
+    <View style={styles.footer}>
+      <ActivityIndicator animating size="large" />
     </View>
   );
 };
@@ -53,5 +54,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#ececec",
+  },
+  footer: {
+    marginTop: 10,
   },
 });
